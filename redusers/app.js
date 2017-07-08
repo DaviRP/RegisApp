@@ -4,6 +4,14 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const redis = require("redis");
+
+//client LEDISSS
+let client=redis.createClient();
+
+client.on("connect", function(){
+  console.log("Regis Conneted")
+})
+
 // Porta
 const port = 3000;
 //Init app
@@ -26,4 +34,9 @@ app.get("/" , function(req, res, next){
 
 app.listen(port, function(){
   console.log("Porta: "+ port);
+});
+
+//Busca de usuario pelo formulario
+app.post("/user/search", function(req,res, next){
+  let id = Request.body.id;
 });
