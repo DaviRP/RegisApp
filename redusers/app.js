@@ -38,5 +38,18 @@ app.listen(port, function(){
 
 //Busca de usuario pelo formulario
 app.post("/user/search", function(req,res, next){
-  let id = Request.body.id;
+  let id = req.body.id;
+
+  client.hgetall(id,function(err,obj){
+    if(!obj){
+      res.render("searchusers",{
+        erro:"Usuario nao existe"
+      });
+    }else{
+      obj.id=id;
+      res.render("details",{
+        user:obj
+      });
+    }
+  });
 });
